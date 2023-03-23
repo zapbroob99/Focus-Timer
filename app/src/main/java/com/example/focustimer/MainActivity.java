@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.media.MediaPlayer;
 
 public class MainActivity extends AppCompatActivity {
     TextView mTimerTextView; //variable for the timer
+    MediaPlayer mMediaPlayer;
     Handler mHandler;
     private int mTimerValue = 0;
     private int mTargetTime = 60*15; // set the target time in seconds here
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getGoal();
-
             }
         });
     }
@@ -61,15 +63,18 @@ public class MainActivity extends AppCompatActivity {
         EditText secondInputEditText= findViewById(R.id.edtGoalDuration);
         String secondUserInput = secondInputEditText.getText().toString();
         int secondInput = Integer.parseInt(secondUserInput);
-        mTargetTime=secondInput*60;
+        mTargetTime=secondInput;
         mTimerTextView.setText(firstInput.toString());
+        mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.beep);
         setTimerScreen();
         startTimer();
 
 
     }
     private void setNoGoalScreen(){
-
+        setGoalButton.setVisibility(View.VISIBLE);
+        setGoalWarning.setVisibility(View.VISIBLE);
+        mTimerTextView.setVisibility(View.GONE);
     }
     private void setTimerScreen(){
         mTimerTextView.setVisibility(View.VISIBLE);
@@ -96,6 +101,12 @@ public class MainActivity extends AppCompatActivity {
                 if (mTimerValue < mTargetTime) {
                     startTimer();
                 }
+                else {
+                    mMediaPlayer.start();
+                    Toast.makeText(MainActivity.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
+                    setNoGoalScreen();
+                    mTimerValue=0;
+                }
             }
         }, 1000); // delay of 1 second
     }
@@ -108,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onStop() {
+
         super.onStop();
         mHandler.removeCallbacksAndMessages(null);
+
     }
 }
