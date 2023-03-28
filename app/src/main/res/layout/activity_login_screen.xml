@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginScreen"
+    android:orientation="vertical"
+    android:background="#fff">
+    <ImageView
+        android:src="@drawable/target"
+        android:id="@+id/iv_smallLogo"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:paddingRight="150dp"
+        android:transitionName="logo_image"/>
+
+    <TextView
+        android:id="@+id/tv_loginLogoName"
+        android:layout_width="wrap_content"
+        android:layout_height="110sp"
+
+        android:text="Hello there, welcome back"
+        android:transitionName="logo_text"
+        android:textSize="40sp" />
+    <TextView
+        android:id="@+id/tv_sloganName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in to continue"
+        android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userName"
+        android:hint="Username"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="Password"
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:textColor="@color/black"
+            android:text="Forgot Password?"
+            android:layout_gravity="right"
+            android:elevation="0dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GO"
+            android:backgroundTint="#6699ff"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:textColor="@color/black"
+            android:text="New user? Sign Up"
+            android:layout_gravity="right"
+            android:elevation="0dp"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>
