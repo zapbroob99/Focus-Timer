@@ -5,35 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        >
+        android:background="@drawable/gradient"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FOCUSTIMER"/>
+            android:text="FOCUSTIMER" />
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:src="@drawable/fire"/>
+            android:src="@drawable/fire" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="6X STREAK"
-            android:textColor="@color/black"
-            android:layout_marginRight="10dp"/>
+            android:textColor="@color/black" />
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:src="@drawable/level"
             android:layout_marginRight="10dp"
-            />
+            android:src="@drawable/level" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="LVL 24"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -117,11 +125,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/id_setGoal"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#1376bc"
         android:text="Set a goal"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

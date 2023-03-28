@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginScreen"
     android:orientation="vertical"
-    android:background="#fff">
+    android:background="@color/bck">
     <ImageView
         android:src="@drawable/target2"
         android:id="@+id/iv_smallLogo"
@@ -66,13 +66,13 @@
             android:text="Forgot Password?"
             android:layout_gravity="right"
             android:elevation="0dp"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_go"
-            android:text="GO"
-            android:backgroundTint="#6699ff"
-            android:textColor="@color/black"
+            android:text="LOGIN"
+            android:background="@drawable/gradient"
+            android:textColor="@color/white"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
         <Button

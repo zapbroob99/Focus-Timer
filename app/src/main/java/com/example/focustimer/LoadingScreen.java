@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LoadingScreen extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 5000;
+    private static int SPLASH_SCREEN = 1600;
     Animation topAnim, bottomAnim;
     ImageView img_logo;
     TextView tv_name, tv_slogan;
