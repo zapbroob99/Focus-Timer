@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 
 public class MainActivity extends AppCompatActivity {
-    TextView mTimerTextView; //variable for the timer
     MediaPlayer mMediaPlayer;
     Handler mHandler;
     private int mTimerValue = 0;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     Button inputAcceptBtn;
     EditText setGoalEdtText;
     EditText setGoalDurationEdtText;
+    ProgressBar mProgressBar;
+    TextView progressText;
+    RelativeLayout rl;
+    NumberPicker durationPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //ASSIGNING TIMER ELEMENTS
-        mTimerTextView=findViewById(R.id.tvTimer);
+         rl = findViewById(R.id.relativeProgressBar);
+        mProgressBar = findViewById(R.id.progressBar);
         mHandler=new Handler();
 
 
@@ -44,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
             //set goal button
             @Override
             public void onClick(View v) {
+                durationPicker = findViewById(R.id.duration_picker);
+                durationPicker.setMinValue(1);
+                durationPicker.setMaxValue(4);
+                durationPicker.setDisplayedValues(new String[] {"5 min", "10 min","15 min","20 min",});
                 setGoalInputScreen();
-
+                //TODO set custom numbers
             }
         });
         inputAcceptBtn=findViewById(R.id.btInputAccept);
@@ -57,14 +68,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getGoal(){
+
+
         EditText firstInputEditText = findViewById(R.id.edtGoalName);
         String firstInput = firstInputEditText.getText().toString(); //this will hold the goal's
         // name when user enters
         EditText secondInputEditText= findViewById(R.id.edtGoalDuration);
         String secondUserInput = secondInputEditText.getText().toString();
-        int secondInput = Integer.parseInt(secondUserInput);
-        mTargetTime=secondInput;
-        mTimerTextView.setText(firstInput.toString());
+        //int secondInput = Integer.parseInt(secondUserInput);
+        //mTargetTime=secondInput;
+        mTargetTime=adjustNumberPicker(durationPicker)*60;
         mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.beep);
         setTimerScreen();
         startTimer();
@@ -74,22 +87,27 @@ public class MainActivity extends AppCompatActivity {
     private void setNoGoalScreen(){
         setGoalButton.setVisibility(View.VISIBLE);
         setGoalWarning.setVisibility(View.VISIBLE);
-        mTimerTextView.setVisibility(View.GONE);
+        rl.setVisibility(View.GONE);
+
     }
     private void setTimerScreen(){
-        mTimerTextView.setVisibility(View.VISIBLE);
+        rl.setVisibility(View.VISIBLE);
         inputAcceptBtn.setVisibility(View.GONE);
         setGoalEdtText.setVisibility(View.GONE);
         setGoalDurationEdtText.setVisibility(View.GONE);
+        durationPicker.setVisibility(View.GONE);
+
     }
     private void setGoalInputScreen(){
+        durationPicker.setVisibility(View.VISIBLE);
         setGoalButton.setVisibility(View.GONE);
         setGoalWarning.setVisibility(View.GONE);
         setGoalDurationEdtText=findViewById(R.id.edtGoalDuration);
-        setGoalDurationEdtText.setVisibility(View.VISIBLE);
+        //setGoalDurationEdtText.setVisibility(View.VISIBLE);
         inputAcceptBtn.setVisibility(View.VISIBLE);
         setGoalEdtText=findViewById(R.id.edtGoalName);
-        setGoalEdtText.setVisibility(View.VISIBLE);
+
+
 
     }
     private void startTimer(){
@@ -115,7 +133,11 @@ public class MainActivity extends AppCompatActivity {
         int minutes = mTimerValue / 60;
         int seconds = mTimerValue % 60;
         String timeString = String.format("%d:%02d", minutes, seconds);
-        mTimerTextView.setText(timeString);
+        progressText=findViewById(R.id.progressText);
+        progressText.setText(""+timeString);
+        int progress = (int) (((float) mTimerValue / (float) mTargetTime) * 100);
+        mProgressBar.setProgress(progress);
+
     }
     @Override
     protected void onStop() {
@@ -123,5 +145,20 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         mHandler.removeCallbacksAndMessages(null);
 
+    }
+    private int adjustNumberPicker(NumberPicker picker){
+        switch (picker.getValue()){
+            case 1:
+                return 5;
+            case 2:
+                return 10;
+            case 3:
+                return 15;
+            case 4:
+                return 20;
+            // add more cases as needed
+            default:
+                return 0;
+        }
     }
 }
