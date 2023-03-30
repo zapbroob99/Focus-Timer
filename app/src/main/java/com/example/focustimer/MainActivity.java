@@ -1,6 +1,8 @@
 package com.example.focustimer;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //ASSIGNING TIMER ELEMENTS
-         rl = findViewById(R.id.relativeProgressBar);
-        mProgressBar = findViewById(R.id.progressBar);
+         rl = findViewById(R.id.relativeProgressBar); //relativelayout
+        mProgressBar = findViewById(R.id.progressBar); //circle timer
         mHandler=new Handler();
 
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 durationPicker.setMaxValue(4);
                 durationPicker.setDisplayedValues(new String[] {"5 min", "10 min","15 min","20 min",});
                 setGoalInputScreen();
-                //TODO set custom numbers
+
             }
         });
         inputAcceptBtn=findViewById(R.id.btInputAccept);
@@ -72,15 +74,18 @@ public class MainActivity extends AppCompatActivity {
 
         EditText firstInputEditText = findViewById(R.id.edtGoalName);
         String firstInput = firstInputEditText.getText().toString(); //this will hold the goal's
-        // name when user enters
         EditText secondInputEditText= findViewById(R.id.edtGoalDuration);
         String secondUserInput = secondInputEditText.getText().toString();
-        //int secondInput = Integer.parseInt(secondUserInput);
-        //mTargetTime=secondInput;
         mTargetTime=adjustNumberPicker(durationPicker)*60;
         mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.beep);
+        //sending variables to focus activity
+        FocusScreen focusScreen=new FocusScreen(firstInput,adjustNumberPicker(durationPicker));
+        Intent i = new Intent(getApplicationContext(),FocusScreen.class);
+        i.putExtra("duration", adjustNumberPicker(durationPicker)*60);
+        i.putExtra("name", firstInput);
+        startActivity(i);
         setTimerScreen();
-        startTimer();
+        startTimer(); //starting timer
 
 
     }

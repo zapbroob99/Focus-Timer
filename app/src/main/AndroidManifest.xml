@@ -12,6 +12,9 @@
         android:theme="@style/Theme.FocusTimer"
         tools:targetApi="31">
         <activity
+            android:name=".FocusScreen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

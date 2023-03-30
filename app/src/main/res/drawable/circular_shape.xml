@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:innerRadiusRatio="2.5"
     android:shape="ring"
-    android:thickness="3dp"
+    android:thickness="6dp"
     android:useLevel="false">
-    <solid android:color="@color/black" />
+    <gradient
+        android:startColor="#6A1B9A"
+        android:centerColor="#1565C0"
+        android:endColor="#ff23729a"
+        android:angle="135"/>
 </shape>
