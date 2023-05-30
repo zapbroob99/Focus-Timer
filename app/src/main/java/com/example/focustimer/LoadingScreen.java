@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.focustimer.loginsignup.LoginScreen;
+
 public class LoadingScreen extends AppCompatActivity {
     private static int SPLASH_SCREEN = 1600;
     Animation topAnim, bottomAnim;
@@ -37,7 +39,7 @@ public class LoadingScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LoadingScreen.this,LoginScreen.class);
+                Intent intent = new Intent(LoadingScreen.this, LoginScreen.class);
                 Pair[] pairs = new Pair[2];
                 pairs[0]=new Pair<View,String>(img_logo,"logo_image");
                 pairs[1]=new Pair<View,String>(tv_name,"logo_text");

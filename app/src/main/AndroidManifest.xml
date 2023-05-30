@@ -12,13 +12,25 @@
         android:theme="@style/Theme.FocusTimer"
         tools:targetApi="31">
         <activity
+            android:name=".loginsignup.VerifyOTP"
+            android:exported="false" />
+        <activity
+            android:name=".loginsignup.SignUp3rdClass"
+            android:exported="false" />
+        <activity
+            android:name=".loginsignup.SignUp2ndClass"
+            android:exported="false" />
+        <activity
+            android:name=".loginsignup.SignUp"
+            android:exported="false" />
+        <activity
             android:name=".FocusScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".loginsignup.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".LoadingScreen"

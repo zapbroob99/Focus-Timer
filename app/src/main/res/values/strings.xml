@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Focus Timer</string>
+    <!--Buttons-->
+
+    <string name="skip_btn">Skip</string>
+
+    <string name="next_btn">Next</string>
+
+    <string name="let_get_started">Lets Get Started</string>
 </resources>

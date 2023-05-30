@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     EditText setGoalEdtText;
     EditText setGoalDurationEdtText;
     ProgressBar mProgressBar;
-    TextView progressText;
     RelativeLayout rl;
     NumberPicker durationPicker;
 
@@ -46,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
         //ASSIGNING TIMER ELEMENTS
          rl = findViewById(R.id.relativeProgressBar); //relativelayout
         mProgressBar = findViewById(R.id.progressBar); //circle timer
-        mHandler=new Handler();
-
-
         setGoalButton.setOnClickListener(new View.OnClickListener() { //what happens whe you click
             //set goal button
             @Override
@@ -74,10 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditText firstInputEditText = findViewById(R.id.edtGoalName);
         String firstInput = firstInputEditText.getText().toString(); //this will hold the goal's
-        EditText secondInputEditText= findViewById(R.id.edtGoalDuration);
-        String secondUserInput = secondInputEditText.getText().toString();
         mTargetTime=adjustNumberPicker(durationPicker)*60;
-        mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.beep);
         //sending variables to focus activity
         FocusScreen focusScreen=new FocusScreen(firstInput,adjustNumberPicker(durationPicker));
         Intent i = new Intent(getApplicationContext(),FocusScreen.class);
@@ -85,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("name", firstInput);
         startActivity(i);
         setTimerScreen();
-        startTimer(); //starting timer
-
-
     }
     private void setNoGoalScreen(){
         setGoalButton.setVisibility(View.VISIBLE);
@@ -115,42 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void startTimer(){
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mTimerValue++;
-                updateTimerText();
-                if (mTimerValue < mTargetTime) {
-                    startTimer();
-                }
-                else {
-                    mMediaPlayer.start();
-                    Toast.makeText(MainActivity.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
-                    setNoGoalScreen();
-                    mTimerValue=0;
-                }
-            }
-        }, 1000); // delay of 1 second
-    }
 
-    private void updateTimerText() {
-        int minutes = mTimerValue / 60;
-        int seconds = mTimerValue % 60;
-        String timeString = String.format("%d:%02d", minutes, seconds);
-        progressText=findViewById(R.id.progressText);
-        progressText.setText(""+timeString);
-        int progress = (int) (((float) mTimerValue / (float) mTargetTime) * 100);
-        mProgressBar.setProgress(progress);
-
-    }
-    @Override
-    protected void onStop() {
-
-        super.onStop();
-        mHandler.removeCallbacksAndMessages(null);
-
-    }
     private int adjustNumberPicker(NumberPicker picker){
         switch (picker.getValue()){
             case 1:
