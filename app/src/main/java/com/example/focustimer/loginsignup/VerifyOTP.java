@@ -119,6 +119,7 @@ public class VerifyOTP extends AppCompatActivity {
                                 updateOldUserData();
                             }
                             else{
+                                Toast.makeText(VerifyOTP.this, "Verification Completed", Toast.LENGTH_SHORT).show();
                                 storeNewUserData();
                             }
 
@@ -140,7 +141,7 @@ public class VerifyOTP extends AppCompatActivity {
     }
 
     private void storeNewUserData() {
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance("https://city-guide-a5ee6-default-rtdb.europe-west1.firebasedatabase.app/");
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance("https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = rootNode.getReference("Users");
         UserHelperClass addNewUser = new UserHelperClass(fullName,username,email,phoneNo,password,date,gender);
         reference.child(phoneNo).setValue(addNewUser);
