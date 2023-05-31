@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FocusScreen"
-    android:background="@color/bck">
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,9 +30,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/fredoka_one"
             android:layout_marginRight="10dp"
             android:text="6X STREAK"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <ImageView
             android:layout_width="50dp"
@@ -43,8 +44,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/fredoka_one"
             android:text="LVL 24"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -85,12 +87,12 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="120dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/gradient"
-        android:textColor="@color/white"
-        android:text="END"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:text="END SESSION"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeProgressBar" />

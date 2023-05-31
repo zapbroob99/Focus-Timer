@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".loginsignup.LoginScreen"
     android:orientation="vertical"
-    android:background="@color/bck">
+    >
     <ImageView
         android:src="@drawable/target2"
         android:id="@+id/iv_smallLogo"
@@ -19,7 +19,7 @@
         android:id="@+id/tv_loginLogoName"
         android:layout_width="wrap_content"
         android:layout_height="110sp"
-
+        android:fontFamily="@font/fredoka_one"
         android:text="Hello there, welcome back"
         android:transitionName="logo_text"
         android:textSize="40sp" />
@@ -35,34 +35,48 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"/>
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/login_country_code_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_showFlag="true"
+        app:ccp_showFullName="true"
+        app:ccp_showNameCode="true" />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/userName"
-        android:hint="Username"
+        android:id="@+id/login_phone"
+        android:hint="Enter Phone Number"
 
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+
+            android:id="@+id/phone_edittext"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
+        android:id="@+id/login_password"
         android:hint="Password"
         app:passwordToggleEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/password_edittext"
+            />
         <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:textColor="@color/black"
+            android:id="@+id/btn_forget"
             android:text="Forgot Password?"
             android:layout_gravity="right"
             android:elevation="0dp"/>

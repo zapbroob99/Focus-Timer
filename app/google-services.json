@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968288209656",
+    "project_id": "focus-timer-8d9d7",
+    "storage_bucket": "focus-timer-8d9d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968288209656:android:a7b958d84990178c3cc90d",
+        "android_client_info": {
+          "package_name": "com.example.focustimer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChROPYnBPHRW9cyqK5SRZBAe4SW-VWROI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
