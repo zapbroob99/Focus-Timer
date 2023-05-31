@@ -1,5 +1,6 @@
 package com.example.focustimer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
@@ -17,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mMediaPlayer;
@@ -31,11 +36,38 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar mProgressBar;
     RelativeLayout rl;
     NumberPicker durationPicker;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //BOTTOM NAV VİEW
+        bottomNavigationView=findViewById(R.id.bottomnav);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                Intent intent;
+                switch(id){
+                    case R.id.dashbord:
+                         intent = new Intent(getApplicationContext(),MainActivity.class);
+                        break;
+                    case R.id.stats:
+                         intent = new Intent(getApplicationContext(),Stats.class);
+                        break;
+                    case R.id.profile:
+                         intent = new Intent(getApplicationContext(),MainActivity.class);
+                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + id);
+                }
+                startActivity(intent);
+                return true;
+            }
+
+        });
 
         //DEFINING SOME UI ELEMENTS
         setGoalButton = findViewById(R.id.id_setGoal); //button for setting a goal

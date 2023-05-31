@@ -12,6 +12,9 @@
         android:theme="@style/Theme.FocusTimer"
         tools:targetApi="31">
         <activity
+            android:name=".Stats"
+            android:exported="false" />
+        <activity
             android:name=".loginsignup.ForgerPasswordSuccessMessage"
             android:exported="false" />
         <activity
