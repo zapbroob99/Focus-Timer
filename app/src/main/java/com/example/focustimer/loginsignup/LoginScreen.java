@@ -59,7 +59,7 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn=findViewById(R.id.btn_go);
         forgetBtn=findViewById(R.id.btn_forget);
         goToSignUpBtn=findViewById(R.id.btn_signup);
-       //TODO: rememberMe=findViewById(R.id.checkBox);
+        //TODO: rememberMe=findViewById(R.id.checkBox);
         phoneEditText=findViewById(R.id.phone_edittext);
         passwordEditText=findViewById(R.id.password_edittext);
 

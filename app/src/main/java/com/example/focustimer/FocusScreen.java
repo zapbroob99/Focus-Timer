@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ public class FocusScreen extends AppCompatActivity {
     private int mTimerValue = 0;
     private int mTargetTime = 60*15; // set the target time in seconds here
     TextView progressText;
+    Button btnEnd;
     public FocusScreen(){
         //empty constructor
     }
@@ -42,11 +45,22 @@ public class FocusScreen extends AppCompatActivity {
         mMediaPlayer = MediaPlayer.create(FocusScreen.this, R.raw.beep);
         startTimer(); //starting timer
 
+        btnEnd=findViewById(R.id.btnEnd);
+        //end button function
+        btnEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTimerValue=mTargetTime;
+            }
+        });
+
+
     }
     private void startTimer(){
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 mTimerValue++;
                 updateTimerText();
                 if (mTimerValue < mTargetTime) {
@@ -56,6 +70,8 @@ public class FocusScreen extends AppCompatActivity {
                     mMediaPlayer.start();
                     Toast.makeText(FocusScreen.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
                     mTimerValue=0;
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent); //TODO: add saved preferences to store session and return
                 }
             }
         }, 1000); // delay of 1 second
@@ -78,5 +94,6 @@ public class FocusScreen extends AppCompatActivity {
         mHandler.removeCallbacksAndMessages(null);
 
     }
+
 
 }

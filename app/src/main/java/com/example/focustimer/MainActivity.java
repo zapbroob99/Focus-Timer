@@ -45,29 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         //BOTTOM NAV VİEW
         bottomNavigationView=findViewById(R.id.bottomnav);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Intent intent;
-                switch(id){
-                    case R.id.dashbord:
-                         intent = new Intent(getApplicationContext(),MainActivity.class);
-                        break;
-                    case R.id.stats:
-                         intent = new Intent(getApplicationContext(),Stats.class);
-                        break;
-                    case R.id.profile:
-                         intent = new Intent(getApplicationContext(),MainActivity.class);
-                         break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + id);
-                }
-                startActivity(intent);
-                return true;
-            }
-
-        });
+        BottomNavigationBar.setupBottomNavigationBar(this, R.id.bottomnav);
 
         //DEFINING SOME UI ELEMENTS
         setGoalButton = findViewById(R.id.id_setGoal); //button for setting a goal
@@ -75,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //ASSIGNING TIMER ELEMENTS
-         rl = findViewById(R.id.relativeProgressBar); //relativelayout
+        rl = findViewById(R.id.relativeProgressBar); //relativelayout
         mProgressBar = findViewById(R.id.progressBar); //circle timer
         setGoalButton.setOnClickListener(new View.OnClickListener() { //what happens whe you click
             //set goal button
