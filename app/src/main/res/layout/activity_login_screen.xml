@@ -9,7 +9,7 @@
     android:orientation="vertical"
     >
     <ImageView
-        android:src="@drawable/target2"
+        android:src="@drawable/newfocus"
         android:id="@+id/iv_smallLogo"
         android:layout_width="300dp"
         android:layout_height="150dp"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_go"
             android:text="LOGIN"
-            android:background="@drawable/gradient"
+            android:background="@color/mainBlue"
             android:textColor="@color/white"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>

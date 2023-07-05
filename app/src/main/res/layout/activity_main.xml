@@ -11,7 +11,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/gradient"
         app:layout_constraintStart_toStartOf="parent">
 
 
@@ -20,29 +19,7 @@
             android:layout_height="wrap_content"
             android:text="FOCUSTIMER" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:src="@drawable/fire" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="6X STREAK"
-            android:textColor="@color/black" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/level" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LVL 24"
-            android:textColor="@color/black" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -96,12 +73,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtGoalName" />
 
-    <NumberPicker
+    <com.shawnlin.numberpicker.NumberPicker
         android:id="@+id/duration_picker"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:outlineAmbientShadowColor="@color/black"
         android:visibility="gone"
+        app:np_selectedTextColor="@color/mainBlue"
+        android:soundEffectsEnabled="true"
+        app:np_dividerColor="@color/mainBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_txt_setGoal" />
@@ -163,7 +143,7 @@
         android:id="@+id/id_txt_setGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You didn't set a goal."
+        android:text="Start focus"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/id_setGoal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +155,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/round_button"
-        android:text="Set a goal"
+        android:text="focus"
         android:textSize="25sp"
         android:visibility="visible"
         android:fontFamily="@font/bangers"
@@ -184,6 +164,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/bottomnav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_setGoal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"

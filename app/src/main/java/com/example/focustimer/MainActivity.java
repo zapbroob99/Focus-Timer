@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.NumberPicker;
+import com.shawnlin.numberpicker.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout rl;
     NumberPicker durationPicker;
     BottomNavigationView bottomNavigationView;
+    int focusTime;
+    String phoneNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getDataFromLogin();
 
         //BOTTOM NAV VİEW
         bottomNavigationView=findViewById(R.id.bottomnav);
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             //set goal button
             @Override
             public void onClick(View v) {
-                durationPicker = findViewById(R.id.duration_picker);
+                durationPicker =(NumberPicker) findViewById(R.id.duration_picker);
                 durationPicker.setMinValue(1);
                 durationPicker.setMaxValue(4);
                 durationPicker.setDisplayedValues(new String[] {"5 min", "10 min","15 min","20 min",});
@@ -111,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
         //setGoalDurationEdtText.setVisibility(View.VISIBLE);
         inputAcceptBtn.setVisibility(View.VISIBLE);
         setGoalEdtText=findViewById(R.id.edtGoalName);
-
-
-
     }
 
     private int adjustNumberPicker(NumberPicker picker){
@@ -130,5 +131,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return 0;
         }
+    }
+    private void getDataFromLogin(){ //gets user info from login
+        Intent intent = getIntent();
+        phoneNo = intent.getStringExtra("phoneNo");
+        focusTime =  Integer.parseInt(intent.getStringExtra("focusTime"));
     }
 }

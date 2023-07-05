@@ -132,9 +132,12 @@ public class LoginScreen extends AppCompatActivity {
                         String _phoneNo=snapshot.child(_completePhoneNumber).child("phoneNo").getValue(String.class);
                         String _date=snapshot.child(_completePhoneNumber).child("date").getValue(String.class);
                         String _gender=snapshot.child(_completePhoneNumber).child("gender").getValue(String.class);
+                        String _focusTime=snapshot.child(_completePhoneNumber).child("focustime").getValue(String.class);
 
 
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        intent.putExtra("phoneNo",_phoneNo);
+                        intent.putExtra("focusTime",_focusTime);
                         startActivity(intent);
 
 
