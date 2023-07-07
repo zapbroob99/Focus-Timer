@@ -3,6 +3,9 @@ package com.example.focustimer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
+import com.example.focustimer.user.UserClass;
 
 public class Profile extends AppCompatActivity {
 
@@ -11,5 +14,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         BottomNavigationBar.setupBottomNavigationBar(this, R.id.bottomnav);
+
     }
 }

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 durationPicker =(NumberPicker) findViewById(R.id.duration_picker);
                 durationPicker.setMinValue(1);
                 durationPicker.setMaxValue(4);
-                durationPicker.setDisplayedValues(new String[] {"5 min", "10 min","15 min","20 min",});
+                durationPicker.setDisplayedValues(new String[] {"20 min", "30 min","45 min","60 min",});
                 setGoalInputScreen();
 
             }
@@ -120,13 +120,13 @@ public class MainActivity extends AppCompatActivity {
     private int adjustNumberPicker(NumberPicker picker){
         switch (picker.getValue()){
             case 1:
-                return 5;
-            case 2:
-                return 10;
-            case 3:
-                return 15;
-            case 4:
                 return 20;
+            case 2:
+                return 30;
+            case 3:
+                return 45;
+            case 4:
+                return 60;
             // add more cases as needed
             default:
                 return 0;
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
     private void getDataFromLogin(){ //gets user info from login
         Intent intent = getIntent();
         phoneNo = intent.getStringExtra("phoneNo");
-        focusTime =  Integer.parseInt(intent.getStringExtra("focusTime"));
+        focusTime =  intent.getIntExtra("focustime",0);
     }
+
 }

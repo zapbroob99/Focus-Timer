@@ -13,8 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.focustimer.user.UserClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class FocusScreen extends AppCompatActivity {
     private String goalName;
@@ -79,16 +81,13 @@ public class FocusScreen extends AppCompatActivity {
                 else if(cutSession==true){
                     Toast.makeText(FocusScreen.this, "You didnt complete your session", Toast.LENGTH_LONG).show();
                     cutSession=true;
+                    UserClass.updateFocusTimeOnDB(mTargetTime);
                     resetTimer();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent); //TODO: add saved preferences to store session and return
                 }
                 else {
-                    mMediaPlayer.start();
-                    Toast.makeText(FocusScreen.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
-                    resetTimer();
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent); //TODO: add saved preferences to store session and return
+                    handleSessionSuccessfull();
                 }
             }
         }, 1000); // delay of 1 second
@@ -121,9 +120,18 @@ public class FocusScreen extends AppCompatActivity {
         mTimerValue = 0;
     }
 
+    private void handleSessionSuccessfull(){
+        mMediaPlayer.start();
+        UserClass.updateFocusTimeOnDB(mTargetTime);
+        Toast.makeText(FocusScreen.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
+        resetTimer();
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent); //TODO: add saved preferences to store session and return
+    }
+
     private void addFocusTimeToDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance("https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
-        reference.child("+905318966401").child("focustime").setValue(7);
+        reference.child(UserClass.getPhoneNo()).child("focustime").setValue(ServerValue.increment(mTargetTime/60));
     }
 
 }

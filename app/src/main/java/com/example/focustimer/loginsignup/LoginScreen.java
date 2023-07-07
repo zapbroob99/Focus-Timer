@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.focustimer.MainActivity;
 import com.example.focustimer.R;
+import com.example.focustimer.user.UserClass;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,9 +111,6 @@ public class LoginScreen extends AppCompatActivity {
         String _completePhoneNumber = "+"+countryCodePicker.getSelectedCountryCode()+_phoneNumber;
 
 
-
-
-
         //database
         Query checkUser = FirebaseDatabase.getInstance("https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").orderByChild("phoneNo").equalTo(_completePhoneNumber);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,12 +130,11 @@ public class LoginScreen extends AppCompatActivity {
                         String _phoneNo=snapshot.child(_completePhoneNumber).child("phoneNo").getValue(String.class);
                         String _date=snapshot.child(_completePhoneNumber).child("date").getValue(String.class);
                         String _gender=snapshot.child(_completePhoneNumber).child("gender").getValue(String.class);
-                        String _focusTime=snapshot.child(_completePhoneNumber).child("focustime").getValue(String.class);
-
+                        int _focusTime=snapshot.child(_completePhoneNumber).child("focustime").getValue(Integer.class);
 
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        intent.putExtra("phoneNo",_phoneNo);
-                        intent.putExtra("focusTime",_focusTime);
+                        UserClass.setUserData(_username,_fullname,_email,_phoneNo,_date,_gender,_focusTime,_password);
+
                         startActivity(intent);
 
 
@@ -212,4 +209,7 @@ public class LoginScreen extends AppCompatActivity {
 
 
     }
+
+
+
 }
