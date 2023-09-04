@@ -6,6 +6,8 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.example.focustimer.user.Profile;
+import com.example.focustimer.user.Stats;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

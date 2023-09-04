@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.view.MenuItem;
@@ -23,6 +25,10 @@ import android.media.MediaPlayer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
+import androidx.recyclerview.widget.PagerSnapHelper;
+
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mMediaPlayer;
     Handler mHandler;
@@ -36,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar mProgressBar;
     RelativeLayout rl;
     NumberPicker durationPicker;
+
+    //define recyclerview objects
+    RecyclerView recyclerView;
+
+    SelectGoalAdapter adapter;
+
     BottomNavigationView bottomNavigationView;
     int focusTime;
     String phoneNo;
@@ -46,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getDataFromLogin();
+
+        //get recyclerview
+        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView();
 
         //BOTTOM NAV VİEW
         bottomNavigationView=findViewById(R.id.bottomnav);
@@ -78,7 +94,29 @@ public class MainActivity extends AppCompatActivity {
                 getGoal();
             }
         });
+        PagerSnapHelper snapHelper= new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
+
     }
+
+
+
+
+    private void recyclerView() {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        ArrayList<SelectGoalHelperClass> goals = new ArrayList<>();
+        goals.add(new SelectGoalHelperClass("Dersslerrr"));
+        goals.add(new SelectGoalHelperClass("Tenis"));
+        goals.add(new SelectGoalHelperClass("Staj"));
+        goals.add(new SelectGoalHelperClass("Kitap"));
+        adapter=new SelectGoalAdapter(goals);
+        recyclerView.setAdapter(adapter);
+        CenterItemScrollListener scrollListener = new CenterItemScrollListener(recyclerView);
+        recyclerView.addOnScrollListener(scrollListener);
+
+    }
+
     private void getGoal(){
 
 
@@ -115,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         //setGoalDurationEdtText.setVisibility(View.VISIBLE);
         inputAcceptBtn.setVisibility(View.VISIBLE);
         setGoalEdtText=findViewById(R.id.edtGoalName);
+        recyclerView.setVisibility(View.GONE);
     }
 
     private int adjustNumberPicker(NumberPicker picker){

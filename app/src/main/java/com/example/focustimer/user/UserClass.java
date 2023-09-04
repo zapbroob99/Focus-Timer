@@ -4,8 +4,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class UserClass {
     public static String userName,email,fullName,gender,date,phoneNo,password;
+    List<Goal> goalsList = new ArrayList<>(); //declared goals
     public static int totalFocusTime;
 
     private static String dbReference="https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -95,4 +99,6 @@ public final class UserClass {
     public static void setPassword(String password) {
         UserClass.password = password;
     }
+
+
 }

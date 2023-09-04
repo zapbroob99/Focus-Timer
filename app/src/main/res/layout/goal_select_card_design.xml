@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="50dp"
+    android:backgroundTint="@color/bck"
+    app:cardElevation="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="50dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/ms_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Study Math"
+            android:layout_marginLeft="10dp"
+            android:textSize="30dp"
+            android:fontFamily="@font/fredoka_one"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+           />
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="60"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:id="@+id/progress_bar"
+            android:progressTint="@color/black"
+
+
+            android:layout_below="@id/ms_title"/>
+        <TextView
+            android:id="@+id/ms_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60% Completed "
+            android:textSize="20dp"
+            android:layout_below="@id/progress_bar"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
