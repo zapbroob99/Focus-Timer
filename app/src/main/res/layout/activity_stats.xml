@@ -4,13 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".user.Stats">
+
+
+    <!-- Statistics Title -->
     <TextView
-        android:id="@+id/txt_focustime"
+        android:id="@+id/statistics_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bugün çok çalıştın yeter."
-        android:textSize="40sp"/>
+        android:text="Your Statistics"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Total Focus Sessions -->
+    <TextView
+        android:id="@+id/total_sessions_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Focus Sessions:"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/total_sessions_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25"
+        app:layout_constraintTop_toTopOf="@+id/total_sessions_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Total Focus Time -->
+    <TextView
+        android:id="@+id/total_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Focus Time (hours):"
+        app:layout_constraintTop_toBottomOf="@+id/total_sessions_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/total_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10.5"
+        app:layout_constraintTop_toTopOf="@+id/total_time_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Other Statistics -->
+    <!-- Add more TextViews or other views as needed for additional statistics -->
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"
         android:layout_width="match_parent"

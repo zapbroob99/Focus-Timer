@@ -26,17 +26,15 @@ public class FocusScreen extends AppCompatActivity {
     RelativeLayout rl;
     ProgressBar mProgressBar;
     private int mTimerValue = 0;
-    private int mTargetTime = 60*15; // set the target time in seconds here
+    private int mTargetTime;
+    private int currentFocus;
     private boolean cutSession=false;
     TextView progressText;
     Button btnEnd;
     public FocusScreen(){
         //empty constructor
     }
-    public FocusScreen(String goalName,int goalDuration){
-        this.goalDuration=goalDuration;
-        this.goalName=goalName;
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +47,7 @@ public class FocusScreen extends AppCompatActivity {
 
         mHandler=new Handler();
 
-        Intent intent = getIntent();
-        mTargetTime = intent.getIntExtra("duration", 0);
-        // intent.getStringExtra("name");
+
         mMediaPlayer = MediaPlayer.create(FocusScreen.this, R.raw.beep);
         startTimer(); //starting timer
 
@@ -69,6 +65,7 @@ public class FocusScreen extends AppCompatActivity {
 
     }
     private void startTimer(){
+        mTargetTime=UserClass.getCurrentGoal().getGoalDuration();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {

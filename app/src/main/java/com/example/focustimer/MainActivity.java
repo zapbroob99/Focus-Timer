@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.example.focustimer.user.UserClass;
 import com.shawnlin.numberpicker.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -79,11 +81,9 @@ public class MainActivity extends AppCompatActivity {
             //set goal button
             @Override
             public void onClick(View v) {
-                durationPicker =(NumberPicker) findViewById(R.id.duration_picker);
-                durationPicker.setMinValue(1);
-                durationPicker.setMaxValue(4);
-                durationPicker.setDisplayedValues(new String[] {"20 min", "30 min","45 min","60 min",});
+
                 setGoalInputScreen();
+                getGoal();
 
             }
         });
@@ -106,10 +106,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         ArrayList<SelectGoalHelperClass> goals = new ArrayList<>();
-        goals.add(new SelectGoalHelperClass("Dersslerrr"));
-        goals.add(new SelectGoalHelperClass("Tenis"));
-        goals.add(new SelectGoalHelperClass("Staj"));
-        goals.add(new SelectGoalHelperClass("Kitap"));
+
+        UserClass.setRecyclerViewCards(goals);
         adapter=new SelectGoalAdapter(goals);
         recyclerView.setAdapter(adapter);
         CenterItemScrollListener scrollListener = new CenterItemScrollListener(recyclerView);
@@ -122,12 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
         EditText firstInputEditText = findViewById(R.id.edtGoalName);
         String firstInput = firstInputEditText.getText().toString(); //this will hold the goal's
-        mTargetTime=adjustNumberPicker(durationPicker)*60;
         //sending variables to focus activity
-        FocusScreen focusScreen=new FocusScreen(firstInput,adjustNumberPicker(durationPicker));
+        FocusScreen focusScreen=new FocusScreen();
         Intent i = new Intent(getApplicationContext(),FocusScreen.class);
-        i.putExtra("duration", adjustNumberPicker(durationPicker)*60);
-        i.putExtra("name", firstInput);
         startActivity(i);
         setTimerScreen();
     }
@@ -142,11 +137,11 @@ public class MainActivity extends AppCompatActivity {
         inputAcceptBtn.setVisibility(View.GONE);
         setGoalEdtText.setVisibility(View.GONE);
         setGoalDurationEdtText.setVisibility(View.GONE);
-        durationPicker.setVisibility(View.GONE);
+
 
     }
     private void setGoalInputScreen(){
-        durationPicker.setVisibility(View.VISIBLE);
+
         setGoalButton.setVisibility(View.GONE);
         setGoalWarning.setVisibility(View.GONE);
         setGoalDurationEdtText=findViewById(R.id.edtGoalDuration);

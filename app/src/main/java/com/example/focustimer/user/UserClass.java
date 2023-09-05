@@ -1,5 +1,10 @@
 package com.example.focustimer.user;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.example.focustimer.SelectGoalHelperClass;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
@@ -8,16 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class UserClass {
-    public static String userName,email,fullName,gender,date,phoneNo,password;
-    List<Goal> goalsList = new ArrayList<>(); //declared goals
+    protected static String userName,email,fullName,gender,date,phoneNo,password;
+    public static Goal currentGoal;
+    public static List<Goal> goalsList=new ArrayList<>();
     public static int totalFocusTime;
 
     private static String dbReference="https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/";
 
     public UserClass() {
     }
-    public static void setUserData(String _username, String _fullName, String _email, String _phoneNo, String _date, String _gender,
-            int _focustime, String _password){
+    public static void getAndSetUserDataFromDB(String _username, String _fullName, String _email, String _phoneNo, String _date, String _gender,
+                                               int _focustime, String _password){
 
         phoneNo=_phoneNo;
         fullName=_fullName;
@@ -34,6 +40,35 @@ public final class UserClass {
         DatabaseReference reference = FirebaseDatabase.getInstance("https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
         reference.child(UserClass.getPhoneNo()).child("focustime").setValue(ServerValue.increment(number/60));
         totalFocusTime+=(number/60);
+    }
+
+    public static  Goal getCurrentGoal() {
+        return currentGoal;
+    }
+
+    public static void setCurrentGoal(Goal currentGoal) {
+        UserClass.currentGoal = currentGoal;
+    }
+
+    public static void getAndSetGoalInfoFromDB(DataSnapshot snapshot, String _completePhoneNumber, Context context){
+        //TODO: implement
+        DataSnapshot goalsSnapshot = snapshot.child(_completePhoneNumber).child("goals");
+        for (DataSnapshot goalSnapshot : goalsSnapshot.getChildren()) {
+            String goalName = goalSnapshot.getKey();
+            int dailyTime = goalSnapshot.child("daily_time").getValue(Integer.class);
+            int total_time = goalSnapshot.child("totaltime").getValue(Integer.class);
+            int focus_duration=goalSnapshot.child("focus_duration").getValue(Integer.class);
+            UserClass.goalsList.add(new Goal(goalName,total_time,dailyTime,focus_duration)); //retrieve goal info from db and add into goalslist
+
+        }
+
+    }
+    public static void setRecyclerViewCards(ArrayList<SelectGoalHelperClass> goals){
+        for (Goal goal : goalsList) {
+            // Access and work with the individual goal object
+            goals.add(new SelectGoalHelperClass(goal.getName()));
+        }
+
     }
 
     public static String getUserName() {

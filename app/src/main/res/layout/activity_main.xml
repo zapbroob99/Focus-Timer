@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -93,6 +92,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomnav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_setGoal"
         app:layout_constraintVertical_bias="0.4" />
@@ -156,6 +156,7 @@
         android:layout_height="wrap_content"
         android:text="Start focus"
         android:visibility="visible"
+
         app:layout_constraintBottom_toTopOf="@+id/id_setGoal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -165,13 +166,15 @@
         android:id="@+id/id_setGoal"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/round_button"
+        android:fontFamily="@font/open_sans_light"
         android:text="focus"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:visibility="visible"
-        android:fontFamily="@font/bangers"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/edtGoalDuration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />

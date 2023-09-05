@@ -1,49 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="150dp"
-    android:layout_margin="5dp"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="50dp"
-    android:backgroundTint="@color/bck"
-    app:cardElevation="8dp">
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:layout_margin="5dp"
+    android:elevation="16dp"
+    app:cardCornerRadius="15dp"
+    android:id="@+id/cardView">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="50dp"
-        android:padding="10dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/ms_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Study Math"
-            android:layout_marginLeft="10dp"
-            android:textSize="30dp"
-            android:fontFamily="@font/fredoka_one"
             android:layout_centerHorizontal="true"
+            android:text="Study Math"
             android:textColor="@color/black"
-           />
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
         <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ms_title"
+            android:layout_marginTop="8dp"
+            style="?android:attr/progressBarStyleHorizontal"
             android:progress="60"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:id="@+id/progress_bar"
             android:progressTint="@color/black"
+            android:indeterminate="false"/>
 
-
-            android:layout_below="@id/ms_title"/>
         <TextView
             android:id="@+id/ms_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60% Completed "
-            android:textSize="20dp"
+            android:text="60% Completed"
+            android:textSize="16sp"
             android:layout_below="@id/progress_bar"
             android:layout_centerHorizontal="true"
-            android:padding="10dp"/>
-
+            android:layout_marginTop="8dp"/>
     </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

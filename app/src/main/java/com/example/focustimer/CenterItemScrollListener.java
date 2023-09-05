@@ -1,11 +1,21 @@
 package com.example.focustimer;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.focustimer.user.UserClass;
 
 public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
     private LinearLayoutManager layoutManager;
@@ -38,16 +48,27 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
             if (viewHolder != null) {
                 // Reset the appearance for all items
                 viewHolder.itemView.getBackground().setTint(Color.WHITE);
+                viewHolder.itemView.setOnClickListener(null); // Remove any previous click listeners
+
+
             }
         }
 
         RecyclerView.ViewHolder centeredViewHolder = recyclerView.findViewHolderForAdapterPosition(centeredPosition);
         if (centeredViewHolder != null) {
             // Highlight the centered item here (e.g., change its background color)
-            //centeredViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(centeredViewHolder.itemView.getContext(), R.color.mainBlue));
-           // centeredViewHolder.itemView.setBackgroundResource(R.color.mainBlue);
-            int selectedColor = Color.rgb(43, 139, 255);
+            int selectedColor = Color.rgb(241, 241, 241);
             centeredViewHolder.itemView.getBackground().setTint(selectedColor);
+            TextView textView = (TextView)centeredViewHolder.itemView.findViewById(R.id.ms_title);
+            UserClass.setCurrentGoal(UserClass.goalsList.get(0));
+            centeredViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("a", "This is a debug message");
+                }
+            });
+
+
 
         }
 
@@ -55,14 +76,12 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
         if (centeredPosition == itemCount - 1) {
             RecyclerView.ViewHolder lastViewHolder = recyclerView.findViewHolderForAdapterPosition(itemCount - 1);
             if (lastViewHolder != null) {
-               // lastViewHolder.itemView.setBackgroundColor(ContextCompat.getColor(lastViewHolder.itemView.getContext(), R.color.mainBlue));
+
 
             }
         }
     }
-    public int getG_centeredPosition(){
-        return g_centeredPosition;
-    }
+
     public RecyclerView.ViewHolder returnCentered(int center){
         RecyclerView.ViewHolder centeredViewHolder = recyclerView.findViewHolderForAdapterPosition(center);
         return centeredViewHolder;

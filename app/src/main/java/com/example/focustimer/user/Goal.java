@@ -2,17 +2,29 @@ package com.example.focustimer.user;
 
 public class Goal {
     private String name;
-    private long totalTimeSpent; // You can use long to represent time in milliseconds or choose a suitable data type
+    private long totalTimeSpent;
+    private long dailyTimeSpent;
+    private int goalDuration;
 
     // Constructor to initialize a goal
-    public Goal(String name) {
+    public Goal(String name,int totalTimeSpent,int dailyTimeSpent, int goalDuration) {
         this.name = name;
-        this.totalTimeSpent = 0; // Initialize total time spent to 0
+        this.totalTimeSpent=totalTimeSpent;
+        this.dailyTimeSpent=dailyTimeSpent;
+        this.goalDuration=goalDuration;
     }
 
     // Getter method for name
     public String getName() {
         return name;
+    }
+
+    public int getGoalDuration() {
+        return goalDuration;
+    }
+
+    public void setGoalDuration(int goalDuration) {
+        this.goalDuration = goalDuration;
     }
 
     // Setter method for name

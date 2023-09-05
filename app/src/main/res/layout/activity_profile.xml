@@ -6,210 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".user.Profile"
     android:orientation="vertical">
-    <RelativeLayout
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:padding="20dp">
-        <ImageView
-            android:id="@+id/profile_image"
-          android:src="@drawable/elon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"/>
-        <TextView
-            android:id="@+id/full_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Elon Musk"
+        android:layout_height="match_parent"
 
-            android:textSize="20sp"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_marginLeft="10dp"
-            android:includeFontPadding="false"
-            android:layout_centerVertical="true"/>
+        android:padding="16dp"
+       >
+
+        <!-- Profile Picture -->
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/elon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"></ImageView>
+
+
+        <!-- User Name -->
         <TextView
             android:id="@+id/user_name"
-            android:includeFontPadding="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="crazy_elon"
-            android:textSize="14sp"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/full_name"
-            />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="25dp"
-        android:layout_marginTop="-100dp">
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="125dp"
-            android:layout_weight="1"
-            app:cardElevation="10dp"
-            app:cardBackgroundColor="@color/mainBlue"
+            android:text="John Doe"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            android:layout_margin="10dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-                <ImageView
+        <!-- User Email -->
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="john.doe@example.com"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"/>
+        <!-- Password Change Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_password_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:elevation="20dp"
+            android:text="Change Password"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/user_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
 
-                <TextView
-                    android:id="@+id/payment_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_centerInParent="true"
-                    android:includeFontPadding="false"
-                    android:text="0"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/payment_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/payment_label"
-
-                    android:layout_centerInParent="true"
-                    android:includeFontPadding="false"
-                    android:text="Time Focused"
-                    android:textSize="14sp" />
-
-
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="125dp"
-            android:layout_weight="1"
-            app:cardElevation="10dp"
-            app:cardBackgroundColor="@color/mainBlue"
-
-            android:layout_margin="10dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:id="@+id/booking_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:includeFontPadding="false"
-                    android:text="0 Days"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/booking_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/booking_label"
-                    android:layout_centerInParent="true"
-
-                    android:includeFontPadding="false"
-                    android:text="Max Streak"
-                    android:textSize="14sp" />
-
-
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Full Name"
-            android:id="@+id/full_name_profile">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Elon Musk"/>
-
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Email"
-            android:id="@+id/email_profile">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="elonn@gmail.com"/>
-
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Phone Number"
-            android:id="@+id/phoneNo_profile">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0531 233 33 44"/>
-
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Password"
-            android:id="@+id/password_profile">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1234" />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <Button
+        <!-- Logout Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            app:layout_constraintTop_toBottomOf="@+id/change_password_button"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="#FF0000"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomnav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav">
 
-            android:backgroundTint="@color/mainBlue"/>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomnav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </LinearLayout>

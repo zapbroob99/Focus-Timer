@@ -5,8 +5,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.appwidget.AppWidgetHost;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,8 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
-
-import java.util.HashMap;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -131,9 +127,9 @@ public class LoginScreen extends AppCompatActivity {
                         String _date=snapshot.child(_completePhoneNumber).child("date").getValue(String.class);
                         String _gender=snapshot.child(_completePhoneNumber).child("gender").getValue(String.class);
                         int _focusTime=snapshot.child(_completePhoneNumber).child("focustime").getValue(Integer.class);
-
+                        UserClass.getAndSetGoalInfoFromDB(snapshot,_completePhoneNumber,getApplicationContext());
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        UserClass.setUserData(_username,_fullname,_email,_phoneNo,_date,_gender,_focusTime,_password);
+                        UserClass.getAndSetUserDataFromDB(_username,_fullname,_email,_phoneNo,_date,_gender,_focusTime,_password);
 
                         startActivity(intent);
 
