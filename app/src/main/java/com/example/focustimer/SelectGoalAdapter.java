@@ -42,7 +42,6 @@ public class SelectGoalAdapter extends RecyclerView.Adapter<SelectGoalAdapter.Se
         SelectGoalHelperClass helperClass = goals.get(position);
         holder.textView.setText(helperClass.getTitle());
 
-
     }
 
 

@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         PagerSnapHelper snapHelper= new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
 
+
+
     }
 
 
@@ -104,16 +106,37 @@ public class MainActivity extends AppCompatActivity {
 
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        // Create an ArrayList for your goals
         ArrayList<SelectGoalHelperClass> goals = new ArrayList<>();
 
-        UserClass.setRecyclerViewCards(goals);
-        adapter=new SelectGoalAdapter(goals);
-        recyclerView.setAdapter(adapter);
-        CenterItemScrollListener scrollListener = new CenterItemScrollListener(recyclerView);
-        recyclerView.addOnScrollListener(scrollListener);
+        // Add items manually at both edges
+        // First item at the left edge
+        SelectGoalHelperClass leftEdgeItem = new SelectGoalHelperClass("Click to Add new goal");
+        // Set properties for the left edge item (e.g., title, description, etc.)
+        // Add any other properties as needed
+        goals.add(leftEdgeItem);
 
+        // Add your dynamically generated goals (you might fetch them from a data source)
+        UserClass.setRecyclerViewCards(goals);
+
+        // Last item at the right edge
+        SelectGoalHelperClass rightEdgeItem = new SelectGoalHelperClass("Click to add new goal");
+        // Set properties for the right edge item
+
+        // Add any other properties as needed
+        goals.add(rightEdgeItem);
+
+        // Create and set the adapter
+        adapter = new SelectGoalAdapter(goals);
+        recyclerView.setAdapter(adapter);
+
+        // Add the scroll listener
+        CenterItemScrollListener scrollListener = new CenterItemScrollListener(recyclerView, this);
+        recyclerView.addOnScrollListener(scrollListener);
     }
+
 
     private void getGoal(){
 
@@ -124,7 +147,9 @@ public class MainActivity extends AppCompatActivity {
         FocusScreen focusScreen=new FocusScreen();
         Intent i = new Intent(getApplicationContext(),FocusScreen.class);
         startActivity(i);
+        overridePendingTransition(0, 0);
         setTimerScreen();
+
     }
     private void setNoGoalScreen(){
         setGoalButton.setVisibility(View.VISIBLE);

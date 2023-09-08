@@ -134,7 +134,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:fontFamily="@font/bangers"
+            android:fontFamily="sans-serif-thin"
             android:id="@+id/progressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,10 +142,10 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Starting"
+            android:text="STARTING"
             android:textColor="@color/black"
             android:textSize="28sp"
-            android:textStyle="bold" />
+             />
 
     </RelativeLayout>
 

@@ -78,7 +78,7 @@ public class FocusScreen extends AppCompatActivity {
                 else if(cutSession==true){
                     Toast.makeText(FocusScreen.this, "You didnt complete your session", Toast.LENGTH_LONG).show();
                     cutSession=true;
-                    UserClass.updateFocusTimeOnDB(mTargetTime);
+                    UserClass.updateTotalFocusTimeOnDB(mTargetTime);
                     resetTimer();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent); //TODO: add saved preferences to store session and return
@@ -119,7 +119,7 @@ public class FocusScreen extends AppCompatActivity {
 
     private void handleSessionSuccessfull(){
         mMediaPlayer.start();
-        UserClass.updateFocusTimeOnDB(mTargetTime);
+        UserClass.updateTotalFocusTimeOnDB(mTargetTime);
         Toast.makeText(FocusScreen.this, "Congratulations! You have achieved your goal!", Toast.LENGTH_LONG).show();
         resetTimer();
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);

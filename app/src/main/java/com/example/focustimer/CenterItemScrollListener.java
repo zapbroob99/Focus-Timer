@@ -21,24 +21,27 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private int g_centeredPosition=0;
+    private Context context;
 
-    public CenterItemScrollListener(RecyclerView recyclerView) {
+
+    public CenterItemScrollListener(RecyclerView recyclerView,Context context) {
         this.recyclerView = recyclerView;
         layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        this.context=context;
     }
 
-    @Override
-    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-        super.onScrolled(recyclerView, dx, dy);
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
 
-        int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-        int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-        int centeredPosition = (firstVisibleItemPosition + lastVisibleItemPosition) / 2;
-        g_centeredPosition=centeredPosition;
+            int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            int centeredPosition = (firstVisibleItemPosition + lastVisibleItemPosition) / 2;
+            g_centeredPosition=centeredPosition;
 
-        // Update the appearance of centered item
-        updateCenteredItem(centeredPosition);
-    }
+            // Update the appearance of centered item
+            updateCenteredItem(centeredPosition);
+        }
 
     private void updateCenteredItem(int centeredPosition) {
         int itemCount = recyclerView.getAdapter().getItemCount();
@@ -64,7 +67,7 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
             centeredViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("a", "This is a debug message");
+                    UserClass.adjustGoalSettings(context).show();
                 }
             });
 
@@ -77,7 +80,10 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
             RecyclerView.ViewHolder lastViewHolder = recyclerView.findViewHolderForAdapterPosition(itemCount - 1);
             if (lastViewHolder != null) {
 
-
+                // Highlight the centered item here (e.g., change its background color)
+                int selectedColor = Color.rgb(241, 241, 241);
+                lastViewHolder.itemView.getBackground().setTint(selectedColor);
+                TextView textView = (TextView)lastViewHolder.itemView.findViewById(R.id.ms_title);
             }
         }
     }

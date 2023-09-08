@@ -1,7 +1,12 @@
 package com.example.focustimer.user;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.widget.Toast;
+import android.content.DialogInterface;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.focustimer.SelectGoalHelperClass;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +41,7 @@ public final class UserClass {
         totalFocusTime=_focustime;
     }
 
-    public static void updateFocusTimeOnDB(int number){
+    public static void updateTotalFocusTimeOnDB(int number){
         DatabaseReference reference = FirebaseDatabase.getInstance("https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
         reference.child(UserClass.getPhoneNo()).child("focustime").setValue(ServerValue.increment(number/60));
         totalFocusTime+=(number/60);
@@ -70,6 +75,75 @@ public final class UserClass {
         }
 
     }
+    public static Dialog adjustGoalSettings(Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        // Create a LinearLayout to hold the dialog content
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        // Create a SeekBar and add it to the LinearLayout
+        SeekBar seekBar = new SeekBar(context);
+        seekBar.setMax(120); // Set the maximum value for the SeekBar
+        seekBar.setProgress(currentGoal.getGoalDuration()); // Set the initial progress
+        layout.addView(seekBar);
+
+        // Create a TextView to display the SeekBar value
+        final TextView seekBarValueTextView = new TextView(context);
+        seekBarValueTextView.setText("Focus Session Duration: " + currentGoal.getGoalDuration()+"Minutes");
+        layout.addView(seekBarValueTextView);
+
+        // Set a SeekBar change listener to update the TextView
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarValueTextView.setText("Focus Session Duration: " + progress+" Minutes");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        builder.setView(layout); // Set the custom layout to the dialog
+
+
+        builder.setTitle(UserClass.getCurrentGoal().getName());
+
+
+        // Add an OK button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //  the OK button click
+                currentGoal.updateFocusDuration(seekBar.getProgress());
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss(); // Close the dialog
+            }
+        });
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+
+        // You can add further customization or button actions here if needed
+
+        return dialog;
+    }
+
+
+
 
     public static String getUserName() {
         return userName;
