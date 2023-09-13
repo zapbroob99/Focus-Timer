@@ -121,12 +121,7 @@ public class MainActivity extends AppCompatActivity {
         // Add your dynamically generated goals (you might fetch them from a data source)
         UserClass.setRecyclerViewCards(goals);
 
-        // Last item at the right edge
-        SelectGoalHelperClass rightEdgeItem = new SelectGoalHelperClass("Click to add new goal");
-        // Set properties for the right edge item
 
-        // Add any other properties as needed
-        goals.add(rightEdgeItem);
 
         // Create and set the adapter
         adapter = new SelectGoalAdapter(goals);

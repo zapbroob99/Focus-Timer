@@ -63,10 +63,11 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
             int selectedColor = Color.rgb(241, 241, 241);
             centeredViewHolder.itemView.getBackground().setTint(selectedColor);
             TextView textView = (TextView)centeredViewHolder.itemView.findViewById(R.id.ms_title);
-            UserClass.setCurrentGoal(UserClass.goalsList.get(0));
+            UserClass.setCurrentGoal(UserClass.goalsList.get(centeredPosition-1));
             centeredViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     UserClass.adjustGoalSettings(context).show();
                 }
             });
@@ -75,17 +76,19 @@ public class CenterItemScrollListener extends RecyclerView.OnScrollListener {
 
         }
 
-        // Additionally, check if we are at the right-most edge and highlight the last item //todo: it does not work
-        if (centeredPosition == itemCount - 1) {
+
+
             RecyclerView.ViewHolder lastViewHolder = recyclerView.findViewHolderForAdapterPosition(itemCount - 1);
             if (lastViewHolder != null) {
 
-                // Highlight the centered item here (e.g., change its background color)
-                int selectedColor = Color.rgb(241, 241, 241);
-                lastViewHolder.itemView.getBackground().setTint(selectedColor);
-                TextView textView = (TextView)lastViewHolder.itemView.findViewById(R.id.ms_title);
+                lastViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        UserClass.addNewGoalDialog(context).show();
+                    }
+                });
             }
-        }
+
     }
 
     public RecyclerView.ViewHolder returnCentered(int center){

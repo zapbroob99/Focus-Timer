@@ -10,6 +10,7 @@ import com.example.focustimer.R;
 import com.example.focustimer.user.UserClass;
 
 public class Stats extends AppCompatActivity {
+
    
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -72,7 +73,14 @@ public final class UserClass {
         for (Goal goal : goalsList) {
             // Access and work with the individual goal object
             goals.add(new SelectGoalHelperClass(goal.getName()));
+
         }
+        // Last item at the right edge
+        SelectGoalHelperClass rightEdgeItem = new SelectGoalHelperClass("Click to add new goal");
+        // Set properties for the right edge item
+
+        // Add any other properties as needed
+        goals.add(rightEdgeItem);
 
     }
     public static Dialog adjustGoalSettings(Context context){
@@ -120,7 +128,7 @@ public final class UserClass {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //  the OK button click
-                currentGoal.updateFocusDuration(seekBar.getProgress());
+                currentGoal.updateFocusDuration(seekBar.getProgress()*60);
                 dialog.dismiss(); // Close the dialog if needed
             }
         });
@@ -138,6 +146,80 @@ public final class UserClass {
         AlertDialog dialog = builder.create();
 
         // You can add further customization or button actions here if needed
+
+        return dialog;
+    }
+
+    public static Dialog addNewGoalDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        // Create a LinearLayout to hold the dialog content
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        // Create an EditText for goal name
+        EditText goalNameEditText = new EditText(context);
+        goalNameEditText.setHint("Goal Name"); // Set a hint for the goal name input
+        layout.addView(goalNameEditText);
+
+        // Create a SeekBar for goal duration
+        SeekBar goalDurationSeekBar = new SeekBar(context);
+        goalDurationSeekBar.setMax(120); // Set the maximum value for the SeekBar
+        goalDurationSeekBar.setProgress(30); // Set an initial progress value
+        layout.addView(goalDurationSeekBar);
+
+        // Create a TextView to display the SeekBar value
+        final TextView seekBarValueTextView = new TextView(context);
+        seekBarValueTextView.setText("Goal Duration: " + goalDurationSeekBar.getProgress() + " Minutes");
+        layout.addView(seekBarValueTextView);
+
+        // Set a SeekBar change listener to update the TextView
+        goalDurationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarValueTextView.setText("Goal Duration: " + progress + " Minutes");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        builder.setView(layout); // Set the custom layout to the dialog
+        builder.setTitle("Add New Goal");
+
+        // Add an "Add" button
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String goalName = goalNameEditText.getText().toString();
+                int goalDuration = goalDurationSeekBar.getProgress();
+
+                if (!goalName.isEmpty()) {
+                    // Create a new goal with the entered name and duration
+                    Goal newGoal = new Goal(goalName,0,0,goalDuration*60);
+                    UserClass.goalsList.add(goalsList.size()-1,newGoal);
+
+                }
+                dialog.dismiss(); // Close the dialog
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // Close the dialog
+            }
+        });
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+
+        // You can add further customization or validation logic here if needed
 
         return dialog;
     }
