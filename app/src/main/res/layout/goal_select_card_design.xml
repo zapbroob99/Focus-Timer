@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:progress="60"
-            android:progressTint="@color/black"
+            android:progressTint="@color/mainBlue"
             android:indeterminate="false"/>
 
         <TextView

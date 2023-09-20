@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.example.focustimer.user.Goal;
 import com.example.focustimer.user.UserClass;
 import com.shawnlin.numberpicker.NumberPicker;
 import android.widget.ProgressBar;
@@ -48,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
     //define recyclerview objects
     RecyclerView recyclerView;
 
-    SelectGoalAdapter adapter;
+    public SelectGoalAdapter adapter;
 
     BottomNavigationView bottomNavigationView;
     int focusTime;
     String phoneNo;
+    private CenterItemScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         //get recyclerview
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView();
+        // Add the scroll listener
+        scrollListener = new CenterItemScrollListener(recyclerView, this);
+        recyclerView.addOnScrollListener(scrollListener);
 
         //BOTTOM NAV VİEW
         bottomNavigationView=findViewById(R.id.bottomnav);
@@ -96,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
         });
         PagerSnapHelper snapHelper= new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+        UserClass.setMainActivityReference(this);
+
+        UserClass.setMainActivity(this);
 
 
 
@@ -104,32 +112,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void recyclerView() {
+    public void recyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        // Create an ArrayList for your goals
-        ArrayList<SelectGoalHelperClass> goals = new ArrayList<>();
+        ArrayList<Goal> goalsList=new ArrayList<Goal>();
 
-        // Add items manually at both edges
-        // First item at the left edge
-        SelectGoalHelperClass leftEdgeItem = new SelectGoalHelperClass("Click to Add new goal");
-        // Set properties for the left edge item (e.g., title, description, etc.)
-        // Add any other properties as needed
-        goals.add(leftEdgeItem);
+        Goal leftEdgeItem = new Goal("Click to Add new goal");
+        goalsList.add(leftEdgeItem);
+        Goal rightEdgeItem = new Goal("Click to Add new goal");
+        goalsList.add(rightEdgeItem);
 
         // Add your dynamically generated goals (you might fetch them from a data source)
-        UserClass.setRecyclerViewCards(goals);
-
+        UserClass.setRecyclerViewCards(goalsList);
 
 
         // Create and set the adapter
-        adapter = new SelectGoalAdapter(goals);
+        adapter = new SelectGoalAdapter(goalsList);
         recyclerView.setAdapter(adapter);
 
-        // Add the scroll listener
-        CenterItemScrollListener scrollListener = new CenterItemScrollListener(recyclerView, this);
-        recyclerView.addOnScrollListener(scrollListener);
+
     }
 
 
@@ -190,6 +192,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         phoneNo = intent.getStringExtra("phoneNo");
         focusTime =  intent.getIntExtra("focustime",0);
+    }
+    public void aaa(){
+        this.recyclerView();
     }
 
 }

@@ -4,25 +4,33 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.focustimer.SelectGoalHelperClass;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.focustimer.CenterItemScrollListener;
+import com.example.focustimer.MainActivity;
+import com.example.focustimer.SelectGoalAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
+import java.sql.Ref;
 import java.util.ArrayList;
-import java.util.List;
 
 public final class UserClass {
     protected static String userName,email,fullName,gender,date,phoneNo,password;
     public static Goal currentGoal;
-    public static List<Goal> goalsList=new ArrayList<>();
+    public static ArrayList<Goal> goalsList=new ArrayList<Goal>();
     public static int totalFocusTime;
+    public static Context mainActivityContext;
+    public static MainActivity mainActivity;
 
     private static String dbReference="https://focus-timer-8d9d7-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -69,20 +77,15 @@ public final class UserClass {
         }
 
     }
-    public static void setRecyclerViewCards(ArrayList<SelectGoalHelperClass> goals){
-        for (Goal goal : goalsList) {
-            // Access and work with the individual goal object
-            goals.add(new SelectGoalHelperClass(goal.getName()));
+    public static void setRecyclerViewCards( ArrayList<Goal> goals){
+
+        for (Goal goal : goalsList){
+            goals.add(goals.size()-1,goal);
 
         }
-        // Last item at the right edge
-        SelectGoalHelperClass rightEdgeItem = new SelectGoalHelperClass("Click to add new goal");
-        // Set properties for the right edge item
-
-        // Add any other properties as needed
-        goals.add(rightEdgeItem);
 
     }
+
     public static Dialog adjustGoalSettings(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
@@ -98,7 +101,7 @@ public final class UserClass {
 
         // Create a TextView to display the SeekBar value
         final TextView seekBarValueTextView = new TextView(context);
-        seekBarValueTextView.setText("Focus Session Duration: " + currentGoal.getGoalDuration()+"Minutes");
+        seekBarValueTextView.setText("Focus Session Duration: " + currentGoal.getGoalDuration()/60+"Minutes");
         layout.addView(seekBarValueTextView);
 
         // Set a SeekBar change listener to update the TextView
@@ -150,6 +153,10 @@ public final class UserClass {
         return dialog;
     }
 
+    public static void setMainActivity(MainActivity mainActivity) {
+        UserClass.mainActivity = mainActivity;
+    }
+
     public static Dialog addNewGoalDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
@@ -165,7 +172,7 @@ public final class UserClass {
         // Create a SeekBar for goal duration
         SeekBar goalDurationSeekBar = new SeekBar(context);
         goalDurationSeekBar.setMax(120); // Set the maximum value for the SeekBar
-        goalDurationSeekBar.setProgress(30); // Set an initial progress value
+        goalDurationSeekBar.setProgress(50); // Set an initial progress value
         layout.addView(goalDurationSeekBar);
 
         // Create a TextView to display the SeekBar value
@@ -202,7 +209,10 @@ public final class UserClass {
                 if (!goalName.isEmpty()) {
                     // Create a new goal with the entered name and duration
                     Goal newGoal = new Goal(goalName,0,0,goalDuration*60);
-                    UserClass.goalsList.add(goalsList.size()-1,newGoal);
+                    UserClass.goalsList.add(newGoal);
+                    RefreshRecyclerView();
+
+
 
                 }
                 dialog.dismiss(); // Close the dialog
@@ -223,7 +233,9 @@ public final class UserClass {
 
         return dialog;
     }
+    public static void addNewGoalToDB(){
 
+    }
 
 
 
@@ -289,6 +301,17 @@ public final class UserClass {
 
     public static void setPassword(String password) {
         UserClass.password = password;
+    }
+
+    public static void setMainActivityReference(MainActivity mainActivity) {
+        mainActivityContext = mainActivity;
+    }
+    public static void RefreshRecyclerView() {
+        // Call the recyclerView() method using the reference to MainActivity
+        if (mainActivity != null) {
+            mainActivity.recreate();
+
+        }
     }
 
 

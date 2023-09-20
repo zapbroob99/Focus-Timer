@@ -12,15 +12,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.focustimer.user.Goal;
 
 import java.util.ArrayList;
 
 public class SelectGoalAdapter extends RecyclerView.Adapter<SelectGoalAdapter.SelectGoalViewHolder> {
 
-    ArrayList<SelectGoalHelperClass> goals;
+    ArrayList<Goal> goals;
 
 
-    public SelectGoalAdapter(ArrayList<SelectGoalHelperClass> goals) {
+    public SelectGoalAdapter(ArrayList<Goal> goals) {
 
         this.goals = goals;
     }
@@ -39,8 +40,8 @@ public class SelectGoalAdapter extends RecyclerView.Adapter<SelectGoalAdapter.Se
     } //end method
 
     public void onBindViewHolder(@NonNull SelectGoalViewHolder holder, int position) {
-        SelectGoalHelperClass helperClass = goals.get(position);
-        holder.textView.setText(helperClass.getTitle());
+        Goal helperClass = goals.get(position);
+        holder.textView.setText(helperClass.getName());
 
     }
 

@@ -26,7 +26,7 @@
         android:gravity="center"
         android:textColor="#2E3840"
         android:text="FocusTimer"
-        android:fontFamily="@font/bangers"
+        android:fontFamily="@font/open_sans_light"
 
         android:textSize="66sp"
         android:transitionName="logo_text"

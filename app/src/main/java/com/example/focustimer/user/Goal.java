@@ -17,6 +17,9 @@ public class Goal {
         this.dailyTimeSpent=dailyTimeSpent;
         this.goalDuration=goalDuration;
     }
+    public Goal(String name){
+        this.name=name;
+    }
 
     // Getter method for name
     public String getName() {

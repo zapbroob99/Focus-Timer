@@ -14,13 +14,14 @@
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:paddingRight="150dp"
-        android:transitionName="logo_image"/>
+        android:transitionName="logo_image"
+        />
 
     <TextView
         android:id="@+id/tv_loginLogoName"
         android:layout_width="wrap_content"
         android:layout_height="110sp"
-        android:fontFamily="@font/fredoka_one"
+        android:fontFamily="@font/open_sans_light"
         android:text="Hello there, welcome back"
         android:transitionName="logo_text"
         android:textSize="40sp" />
